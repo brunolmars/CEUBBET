@@ -16,6 +16,8 @@ import com.example.ceubetjava.data.CreditosUsuario;
 import com.example.ceubetjava.data.CreditosUsuarioDao;
 import com.example.ceubetjava.data.Game;
 import com.example.ceubetjava.data.GameDao;
+import com.example.ceubetjava.data.UserDao;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -52,12 +54,15 @@ public class BatalhaNavalActivity extends AppCompatActivity {
         AppDatabase db = AppDatabase.getInstance(this);
         creditosUsuarioDao = db.creditosUsuarioDao();
         GameDao gameDao = db.gameDao();
+        UserDao userDao = db.userDao();
 
         if (!isGuest && userId != -1) {
             AppDatabase.executor.execute(() -> {
                 Game bnGame = gameDao.getGameByName("Batalha Naval");
                 if (bnGame == null) return;
                 gameId = bnGame.id;
+                com.example.ceubetjava.data.User user = userDao.getUserById(userId);
+                if (user == null) return;
                 creditosUsuario = creditosUsuarioDao.getCreditos(userId, gameId);
                 if (creditosUsuario == null) {
                     creditosUsuario = new CreditosUsuario();

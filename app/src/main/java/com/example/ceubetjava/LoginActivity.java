@@ -50,31 +50,24 @@ public class LoginActivity extends AppCompatActivity implements RegisterBottomSh
         initializeViews();
         setupClickListeners();
 
-        // Verifica o login salvo em background
+        
         checkSavedLogin();
     }
 
     private void checkSavedLogin() {
         if (isCheckingLogin) return;
-        
+
         if (prefs.getBoolean("isLoggedIn", false) && prefs.getBoolean("rememberMe", false)) {
             String savedUsername = prefs.getString("currentUser", "");
             if (!TextUtils.isEmpty(savedUsername)) {
                 isCheckingLogin = true;
+                loginButton.setEnabled(false);
                 userRepository.getUserByUsername(savedUsername, new UserRepository.OnUserCallback() {
                     @Override
                     public void onSuccess(User user) {
                         runOnUiThread(() -> {
                             isCheckingLogin = false;
                             loginButton.setEnabled(true);
-                            
-                            // Salva as preferências de "lembre de mim"
-                            SharedPreferences.Editor editor = prefs.edit();
-                            editor.putString("lastUsername", savedUsername);
-                            editor.putBoolean("rememberMe", rememberMeCheckbox.isChecked());
-                            editor.apply();
-                            
-                            // Login bem sucedido
                             saveLoginState(savedUsername);
                             showToast("Bem-vindo de volta!");
                             onLoginSuccess(false, savedUsername, user.getId());
@@ -85,17 +78,17 @@ public class LoginActivity extends AppCompatActivity implements RegisterBottomSh
                     public void onError(String message) {
                         runOnUiThread(() -> {
                             isCheckingLogin = false;
+                            loginButton.setEnabled(true);
                             clearSavedLogin();
+                            showToast("Usuário salvo não encontrado. Faça login novamente.");
                         });
                     }
                 });
             } else {
-                 // Se savedUsername estiver vazio, limpa o estado de login
-                 clearSavedLogin();
+                clearSavedLogin();
             }
         }
 
-        // Restaura o username se existir
         String savedUsername = prefs.getString("lastUsername", "");
         if (!TextUtils.isEmpty(savedUsername)) {
             usernameInput.setText(savedUsername);
@@ -107,6 +100,8 @@ public class LoginActivity extends AppCompatActivity implements RegisterBottomSh
         SharedPreferences.Editor editor = prefs.edit();
         editor.remove("isLoggedIn");
         editor.remove("currentUser");
+        editor.remove("lastUsername");
+        editor.remove("rememberMe");
         editor.apply();
     }
 
@@ -157,13 +152,13 @@ public class LoginActivity extends AppCompatActivity implements RegisterBottomSh
                         isCheckingLogin = false;
                         loginButton.setEnabled(true);
                         
-                        // Salva as preferências de "lembre de mim"
+                        
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putString("lastUsername", username);
                         editor.putBoolean("rememberMe", rememberMeCheckbox.isChecked());
                         editor.apply();
                         
-                        // Login bem sucedido
+                        
                         saveLoginState(username);
                         showToast("Bem-vindo de volta!");
                         onLoginSuccess(false, user.getUsername(), user.getId());
@@ -243,7 +238,7 @@ public class LoginActivity extends AppCompatActivity implements RegisterBottomSh
         UsersAdapter adapter = new UsersAdapter();
         recyclerView.setAdapter(adapter);
 
-        // Load users from database
+            
         userRepository.getAllUsers(new UserRepository.OnUsersCallback() {
             @Override
             public void onSuccess(List<User> users) {
@@ -267,7 +262,7 @@ public class LoginActivity extends AppCompatActivity implements RegisterBottomSh
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Clear saved credentials if "Remember Me" is not checked
+        
         if (!rememberMeCheckbox.isChecked()) {
             clearSavedLogin();
         }

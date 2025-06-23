@@ -10,6 +10,7 @@ import com.example.ceubetjava.blackjack.model.Dealer;
 import com.example.ceubetjava.blackjack.model.Hand;
 import com.example.ceubetjava.blackjack.model.Bet;
 import com.example.ceubetjava.data.GameDao;
+import com.example.ceubetjava.data.UserDao;
 
 /**
  * Controlador principal do jogo de Blackjack
@@ -58,12 +59,15 @@ public class GameController {
         AppDatabase db = AppDatabase.getInstance(context);
         this.creditosUsuarioDao = db.creditosUsuarioDao();
         GameDao gameDao = db.gameDao();
+        UserDao userDao = db.userDao();
         this.game = new com.example.ceubetjava.blackjack.model.Game(playerName, initialChips, numDecks, minBet, maxBet);
 
         AppDatabase.executor.execute(() -> {
             com.example.ceubetjava.data.Game blackjackGame = gameDao.getGameByName("Blackjack");
             if (blackjackGame == null) return;
             gameId = blackjackGame.id;
+            com.example.ceubetjava.data.User user = userDao.getUserById(userId);
+            if (user == null) return;
             creditosUsuario = creditosUsuarioDao.getCreditos(userId, gameId);
             if (creditosUsuario == null) {
                 creditosUsuario = new CreditosUsuario();
@@ -76,19 +80,12 @@ public class GameController {
         });
     }
     
-    /**
-     * Define o listener para eventos do jogo
-     * @param listener listener para eventos
-     */
+   
     public void setGameListener(GameListener listener) {
         this.listener = listener;
     }
     
-    /**
-     * Inicia uma nova rodada
-     * @param betAmount valor da aposta
-     * @return true se a rodada foi iniciada com sucesso
-     */
+ 
     public boolean startRound(int betAmount) {
         boolean success = game.startRound(betAmount);
         
@@ -96,11 +93,10 @@ public class GameController {
             listener.onGameStateChanged(Game.STATE_PLAYER_TURN);
             listener.onPlayerTurn(0);
             
-            // Verifica se o jogador tem Blackjack
+      
             if (game.getPlayer().getMainHand().isBlackjack()) {
                 listener.onPlayerBlackjack();
-                
-                // Verifica se o dealer também tem Blackjack
+               
                 if (game.getDealer().getHand().isBlackjack()) {
                     game.playDealerTurn();
                     listener.onDealerBlackjack();
@@ -117,22 +113,17 @@ public class GameController {
         return success;
     }
     
-    /**
-     * Jogador pede mais uma carta
-     * @return true se a operação foi bem-sucedida
-     */
+
     public boolean playerHit() {
         int currentHandIndex = game.getCurrentHandIndex();
         boolean success = game.playerHit();
         
         if (success && listener != null) {
             listener.onCardDealt(true, currentHandIndex, true);
-            
-            // Verifica se o jogador estourou
+          
             if (game.getPlayer().getHands().get(currentHandIndex).isBusted()) {
                 listener.onPlayerBusted(currentHandIndex);
-                
-                // Verifica se o jogo acabou
+          
                 if (game.getCurrentState() == Game.STATE_DEALER_TURN) {
                     listener.onDealerTurn();
                 } else if (game.getCurrentState() == Game.STATE_GAME_OVER) {
@@ -147,19 +138,15 @@ public class GameController {
         return success;
     }
     
-    /**
-     * Jogador decide parar
-     * @return true se a operação foi bem-sucedida
-     */
+
     public boolean playerStand() {
         boolean success = game.playerStand();
         
         if (success && listener != null) {
-            // Verifica se o jogo passou para o turno do dealer
+          
             if (game.getCurrentState() == Game.STATE_DEALER_TURN) {
                 listener.onDealerTurn();
-                
-                // Verifica o resultado do jogo
+              
                 checkGameResult();
             } else {
                 listener.onPlayerTurn(game.getCurrentHandIndex());
@@ -168,11 +155,7 @@ public class GameController {
         
         return success;
     }
-    
-    /**
-     * Jogador dobra a aposta
-     * @return true se a operação foi bem-sucedida
-     */
+  
     public boolean playerDouble() {
         int currentHandIndex = game.getCurrentHandIndex();
         boolean success = game.playerDouble();
@@ -180,17 +163,17 @@ public class GameController {
         if (success && listener != null) {
             listener.onCardDealt(true, currentHandIndex, true);
             
-            // Verifica se o jogador estourou
+      
             if (game.getPlayer().getHands().get(currentHandIndex).isBusted()) {
                 listener.onPlayerBusted(currentHandIndex);
                 listener.onDealerWin();
             }
             
-            // Verifica se o jogo passou para o turno do dealer
+       
             if (game.getCurrentState() == Game.STATE_DEALER_TURN) {
                 listener.onDealerTurn();
                 
-                // Verifica o resultado do jogo
+              
                 checkGameResult();
             } else if (game.getCurrentState() == Game.STATE_PLAYER_TURN) {
                 listener.onPlayerTurn(game.getCurrentHandIndex());
@@ -199,11 +182,7 @@ public class GameController {
         
         return success;
     }
-    
-    /**
-     * Jogador divide um par
-     * @return true se a operação foi bem-sucedida
-     */
+   
     public boolean playerSplit() {
         boolean success = game.playerSplit();
         
@@ -214,16 +193,12 @@ public class GameController {
         
         return success;
     }
-    
-    /**
-     * Jogador faz um seguro
-     * @return true se a operação foi bem-sucedida
-     */
+ 
     public boolean playerInsurance() {
         boolean success = game.playerInsurance();
         
         if (success && listener != null) {
-            // Se o dealer tiver Blackjack, o seguro é pago
+          
             if (game.getDealer().getHand().isBlackjack()) {
                 listener.onInsurancePaid();
             }
@@ -232,10 +207,7 @@ public class GameController {
         return success;
     }
     
-    /**
-     * Jogador se rende
-     * @return true se a operação foi bem-sucedida
-     */
+ 
     public boolean playerSurrender() {
         boolean success = game.playerSurrender();
         
@@ -247,15 +219,12 @@ public class GameController {
         
         return success;
     }
-    
-    /**
-     * Verifica o resultado do jogo após o turno do dealer
-     */
+  
     private void checkGameResult() {
         Player player = game.getPlayer();
         Dealer dealer = game.getDealer();
         
-        // Verifica se o dealer estourou
+  
         if (dealer.getHand().isBusted()) {
             listener.onDealerBusted();
             
@@ -272,7 +241,7 @@ public class GameController {
             if (dealer.getHand().isBlackjack()) {
                 listener.onDealerBlackjack();
                 
-                // Verifica cada mão do jogador
+               
                 for (int i = 0; i < player.getHands().size(); i++) {
                     Hand hand = player.getHands().get(i);
                     if (hand.isBlackjack()) {
@@ -283,8 +252,7 @@ public class GameController {
                 }
             } else {
                 int dealerValue = dealer.getHand().getValue();
-                
-                // Compara cada mão do jogador com a do dealer
+               
                 for (int i = 0; i < player.getHands().size(); i++) {
                     Hand hand = player.getHands().get(i);
                     Bet bet = player.getBets().get(i);
@@ -293,7 +261,7 @@ public class GameController {
                         continue; // Mão já perdida
                     }
                     
-                    // Verifica prêmios especiais
+                
                     if (hand.has678SameSuit() || hand.hasThreeSevens()) {
                         listener.onPlayerWin(i, false, true);
                         continue;
@@ -315,15 +283,12 @@ public class GameController {
         listener.onGameOver();
     }
     
-    /**
-     * Obtém o jogo
-     * @return jogo
-     */
+  
     public com.example.ceubetjava.blackjack.model.Game getGame() {
         return game;
     }
 
-    // Após qualquer alteração de créditos (ganho/perda), chame este método:
+   
     public void saveCredits() {
         if (creditosUsuario != null && gameId != -1) {
             int novosCreditos = game.getPlayer().getChips();

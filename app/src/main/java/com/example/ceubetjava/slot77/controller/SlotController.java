@@ -9,6 +9,7 @@ import com.example.ceubetjava.data.CreditosUsuario;
 import com.example.ceubetjava.data.CreditosUsuarioDao;
 import com.example.ceubetjava.data.Game;
 import com.example.ceubetjava.data.GameDao;
+import com.example.ceubetjava.data.UserDao;
 import com.example.ceubetjava.slot77.model.SlotMachine;
 import com.example.ceubetjava.slot77.model.SpinResult;
 
@@ -43,6 +44,7 @@ public class SlotController {
         AppDatabase db = AppDatabase.getInstance(context);
         this.creditosUsuarioDao = db.creditosUsuarioDao();
         GameDao gameDao = db.gameDao();
+        UserDao userDao = db.userDao();
         this.slotMachine = new SlotMachine(initialCredits);
 
         if (!isGuest && userId != -1) {
@@ -50,6 +52,8 @@ public class SlotController {
                 Game slotGame = gameDao.getGameByName("Slot77");
                 if (slotGame == null) return;
                 gameId = slotGame.id;
+                com.example.ceubetjava.data.User user = userDao.getUserById(userId);
+                if (user == null) return;
                 creditosUsuario = creditosUsuarioDao.getCreditos(userId, gameId);
                 if (creditosUsuario == null) {
                     creditosUsuario = new CreditosUsuario();

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Base underwater casino background -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#0277BD" />
+        </shape>
+    </item>
+
+    <!-- Gradient overlay -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="135"
+                android:startColor="#800277BD"
+                android:centerColor="#80039BE5"
+                android:endColor="#8003A9F4" />
+        </shape>
+    </item>
+
+    <!-- Decorative bubbles pattern -->
+    <item>
+        <shape android:shape="oval">
+            <size android:width="20dp" android:height="20dp" />
+            <solid android:color="#20FFFFFF" />
+        </shape>
+    </item>
+</layer-list> 

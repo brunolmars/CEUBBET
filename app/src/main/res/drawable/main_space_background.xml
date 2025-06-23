@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Base gradient background -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="225"
+                android:endColor="#1A1A2E"
+                android:centerColor="#2D2B55"
+                android:startColor="#3D3B75"
+                android:type="linear" />
+        </shape>
+    </item>
+
+    <!-- Accent glow -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="135"
+                android:centerColor="#226C63FF"
+                android:endColor="#006C63FF"
+                android:startColor="#006C63FF"
+                android:type="linear" />
+        </shape>
+    </item>
+</layer-list> 

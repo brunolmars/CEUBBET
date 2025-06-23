@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Small stars -->
+    <path
+        android:fillColor="@color/space_stars"
+        android:pathData="M20,20h2v2h-2z"/>
+    <path
+        android:fillColor="@color/space_stars"
+        android:pathData="M80,40h2v2h-2z"/>
+    <path
+        android:fillColor="@color/space_stars"
+        android:pathData="M150,30h2v2h-2z"/>
+    <path
+        android:fillColor="@color/space_stars"
+        android:pathData="M40,100h2v2h-2z"/>
+    <path
+        android:fillColor="@color/space_stars"
+        android:pathData="M120,120h2v2h-2z"/>
+    <path
+        android:fillColor="@color/space_stars"
+        android:pathData="M180,160h2v2h-2z"/>
+    <path
+        android:fillColor="@color/space_stars"
+        android:pathData="M60,180h2v2h-2z"/>
+
+    <!-- Medium stars -->
+    <path
+        android:fillColor="@color/space_stars"
+        android:pathData="M100,60l3,3l-3,3l-3,-3z"/>
+    <path
+        android:fillColor="@color/space_stars"
+        android:pathData="M30,140l3,3l-3,3l-3,-3z"/>
+    <path
+        android:fillColor="@color/space_stars"
+        android:pathData="M160,90l3,3l-3,3l-3,-3z"/>
+
+    <!-- Large stars with glow -->
+    <path
+        android:fillColor="#4DFFFFFF"
+        android:pathData="M50,50c0,5.5 -4.5,10 -10,10s-10,-4.5 -10,-10s4.5,-10 10,-10S50,44.5 50,50"/>
+    <path
+        android:fillColor="#4DFFFFFF"
+        android:pathData="M180,120c0,5.5 -4.5,10 -10,10s-10,-4.5 -10,-10s4.5,-10 10,-10S180,114.5 180,120"/>
+    <path
+        android:fillColor="#4DFFFFFF"
+        android:pathData="M70,160c0,5.5 -4.5,10 -10,10s-10,-4.5 -10,-10s4.5,-10 10,-10S70,154.5 70,160"/>
+
+    <!-- Star centers -->
+    <path
+        android:fillColor="@color/space_stars"
+        android:pathData="M40,50c0,2.8 -2.2,5 -5,5s-5,-2.2 -5,-5s2.2,-5 5,-5S40,47.2 40,50"/>
+    <path
+        android:fillColor="@color/space_stars"
+        android:pathData="M170,120c0,2.8 -2.2,5 -5,5s-5,-2.2 -5,-5s2.2,-5 5,-5S170,117.2 170,120"/>
+    <path
+        android:fillColor="@color/space_stars"
+        android:pathData="M60,160c0,2.8 -2.2,5 -5,5s-5,-2.2 -5,-5s2.2,-5 5,-5S60,157.2 60,160"/>
+</vector> 

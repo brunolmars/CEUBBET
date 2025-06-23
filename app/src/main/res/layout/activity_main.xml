@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_space_background"
+    tools:context=".MainActivity">
+
+    <!-- Barra Superior com Logo e Título -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.02" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottomGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.98" />
+
+    <!-- Container da Barra Superior -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/topBarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_small"
+        app:cardBackgroundColor="#1A1A2E"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="8dp"
+        app:layout_constraintTop_toTopOf="@id/topGuideline">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_medium">
+
+            <ImageView
+                android:id="@+id/logoMini"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/rounded_logo_background"
+                android:padding="4dp"
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/title_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:text="CEUBET"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"
+                android:textColor="@color/space_stars"
+                android:shadowColor="@color/space_accent"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="15"
+                app:layout_constraintStart_toEndOf="@id/logoMini"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/logoutButton"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="Sair"
+                android:textColor="#FFFFFF"
+                app:cornerRadius="24dp"
+                app:strokeColor="#FFD700"
+                app:strokeWidth="1dp"
+                android:backgroundTint="#33000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <!-- Adicionar botão Início ao menu superior -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBackToHome"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="Início"
+                android:textColor="#FFFFFF"
+                app:cornerRadius="24dp"
+                app:strokeColor="#FFD700"
+                app:strokeWidth="1dp"
+                android:backgroundTint="#33000000"
+                app:layout_constraintEnd_toStartOf="@id/logoutButton"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="8dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Display de Créditos -->
+    <TextView
+        android:id="@+id/credits_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:text="Créditos: 1000"
+        android:textSize="@dimen/text_size_large"
+        android:textColor="#FFD700"
+        android:shadowColor="@color/space_accent"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="10"
+        android:background="@drawable/credits_background"
+        android:paddingHorizontal="@dimen/padding_large"
+        android:paddingVertical="@dimen/padding_medium"
+        app:layout_constraintTop_toBottomOf="@id/topBarContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Display de Mensagens -->
+    <TextView
+        android:id="@+id/message_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_large"
+        android:paddingVertical="@dimen/padding_medium"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/text_size_medium"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:elevation="20dp"
+        android:alpha="0"
+        android:layout_marginTop="@dimen/margin_medium"
+        app:layout_constraintTop_toBottomOf="@id/credits_display"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Container do Caça-Níquel -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/slot_machine_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/margin_medium"
+        android:layout_marginVertical="@dimen/margin_medium"
+        app:cardBackgroundColor="#1A1A2E"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="8dp"
+        app:strokeColor="@color/space_accent"
+        app:strokeWidth="2dp"
+        app:layout_constraintTop_toBottomOf="@id/credits_display"
+        app:layout_constraintBottom_toTopOf="@id/controls_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintWidth_percent="0.95">
+
+        <!-- Layout das Roletas -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_medium">
+
+            <!-- Símbolos Acima -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/reel1_above"
+                    style="@style/GemSymbolStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="0.5"/>
+
+                <TextView
+                    android:id="@+id/reel2_above"
+                    style="@style/GemSymbolStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="0.5"/>
+
+                <TextView
+                    android:id="@+id/reel3_above"
+                    style="@style/GemSymbolStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="0.5"/>
+
+                <TextView
+                    android:id="@+id/reel4_above"
+                    style="@style/GemSymbolStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="0.5"/>
+
+                <TextView
+                    android:id="@+id/reel5_above"
+                    style="@style/GemSymbolStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="0.5"/>
+            </LinearLayout>
+
+            <!-- Símbolos Principais -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/reel1"
+                    style="@style/GemSymbolStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/reel2"
+                    style="@style/GemSymbolStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/reel3"
+                    style="@style/GemSymbolStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/reel4"
+                    style="@style/GemSymbolStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/reel5"
+                    style="@style/GemSymbolStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <!-- Símbolos Abaixo -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/reel1_below"
+                    style="@style/GemSymbolStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="0.5"/>
+
+                <TextView
+                    android:id="@+id/reel2_below"
+                    style="@style/GemSymbolStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="0.5"/>
+
+                <TextView
+                    android:id="@+id/reel3_below"
+                    style="@style/GemSymbolStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="0.5"/>
+
+                <TextView
+                    android:id="@+id/reel4_below"
+                    style="@style/GemSymbolStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="0.5"/>
+
+                <TextView
+                    android:id="@+id/reel5_below"
+                    style="@style/GemSymbolStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="0.5"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Container de Controles -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/controls_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_medium"
+        android:layout_marginBottom="@dimen/margin_medium"
+        app:cardBackgroundColor="#1A1A2E"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="16dp"
+        app:strokeColor="@color/space_accent"
+        app:strokeWidth="2dp"
+        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.95">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_medium">
+
+            <!-- Controles de Aposta -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/margin_medium">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/decreaseBetButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:text="-"
+                    android:textSize="@dimen/text_size_large"
+                    android:textStyle="bold"
+                    app:cornerRadius="24dp"
+                    android:backgroundTint="#4A148C"
+                    app:strokeColor="#FFD700"
+                    app:strokeWidth="1dp"/>
+
+                <EditText
+                    android:id="@+id/betInput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:minWidth="80dp"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:textColor="#FFD700"
+                    android:textSize="@dimen/text_size_medium"
+                    android:background="@android:color/transparent"
+                    android:layout_marginHorizontal="@dimen/margin_medium"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/increaseBetButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:text="+"
+                    android:textSize="@dimen/text_size_large"
+                    android:textStyle="bold"
+                    app:cornerRadius="24dp"
+                    android:backgroundTint="#4A148C"
+                    app:strokeColor="#FFD700"
+                    app:strokeWidth="1dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/maxBetButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="MAX"
+                    android:textSize="@dimen/text_size_small"
+                    android:textStyle="bold"
+                    app:cornerRadius="24dp"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:backgroundTint="#4A148C"
+                    app:strokeColor="#FFD700"
+                    app:strokeWidth="1dp"/>
+            </LinearLayout>
+
+            <!-- Botão de Girar -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/spin_button"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:text="GIRAR"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true"
+                android:enabled="true"
+                app:cornerRadius="32dp"
+                android:backgroundTint="#6200EA"
+                app:strokeColor="#FFD700"
+                app:strokeWidth="2dp"
+                android:elevation="8dp"
+                android:stateListAnimator="@null"
+                app:rippleColor="#80FFFFFF"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Coin Animation Overlay -->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/coinAnimation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:elevation="25dp"
+        android:background="#80000000"
+        app:lottie_rawRes="@raw/coin_animation"
+        app:lottie_autoPlay="false"
+        app:lottie_loop="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

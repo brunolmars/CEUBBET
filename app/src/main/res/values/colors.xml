@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base colors -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Space theme colors -->
+    <color name="space_accent">#6C63FF</color>
+    <color name="space_accent_dark">#4B44CC</color>
+    <color name="space_background_start">#1A1A2E</color>
+    <color name="space_background_end">#16213E</color>
+    <color name="space_stars">#FFD700</color>
+
+    <!-- Theme colors -->
+    <color name="primary">#6200EA</color>
+    <color name="primary_dark">#4A148C</color>
+    <color name="primary_light">#B388FF</color>
+    <color name="accent">#FFD700</color>
+
+    <!-- Background colors -->
+    <color name="background_start">#1A1A2E</color>
+    <color name="background_end">#0F0F1A</color>
+    <color name="background_dark">#E0E0E0</color>
+    <color name="background_darker">#CCCCCC</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="input_background">#FFFFFF</color>
+
+    <!-- Text colors -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_color_primary">#FFFFFF</color>
+    <color name="text_color_secondary">#757575</color>
+    <color name="text_color_hint">#9E9E9E</color>
+    <color name="text_color_disabled">#BDBDBD</color>
+    <color name="hint_color">#9E9E9E</color>
+
+    <!-- Button colors -->
+    <color name="button_color">#6C63FF</color>
+    <color name="button_text">#FFFFFF</color>
+    <color name="button_gradient_start">#7E57FF</color>
+    <color name="button_gradient_end">#6C63FF</color>
+    <color name="button_stroke">#8B84FF</color>
+    <color name="facebook_button">#4267B2</color>
+    <color name="button_background_color">#4A148C</color>
+    <color name="button_negative_color">#B71C1C</color>
+
+    <!-- Effect colors -->
+    <color name="shadow_color">#4D000000</color>
+    <color name="ripple_color">#336C63FF</color>
+    <color name="title_glow">#6C63FF</color>
+    <color name="diamond_glow">#6C63FF</color>
+
+    <!-- Status colors -->
+    <color name="success_green">#4CAF50</color>
+    <color name="error_red">#F44336</color>
+    <color name="credits_positive">#4CAF50</color>
+    <color name="credits_negative">#FF5252</color>
+    <color name="money_color">#4CAF50</color>
+
+    <!-- Message colors -->
+    <color name="message_background_start">#FFFFFF</color>
+    <color name="message_background_end">#F5F5F5</color>
+
+    <!-- Gem colors -->
+    <color name="gem_purple">#9C27B0</color>
+    <color name="gem_blue">#2196F3</color>
+    <color name="gem_green">#4CAF50</color>
+    <color name="gem_red">#F44336</color>
+    <color name="gem_yellow">#FFD700</color>
+    <color name="gem_pink">#E040FB</color>
+    <color name="gem_orange">#FF9800</color>
+
+    <color name="purple_500">#6200EE</color>
+    <color name="green">#4CAF50</color>
+    <color name="red">#F44336</color>
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Base bamboo texture -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="135"
+                android:startColor="#2E7D32"
+                android:centerColor="#388E3C"
+                android:endColor="#43A047" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+
+    <!-- Bamboo pattern overlay -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="45"
+                android:startColor="#401B5E20"
+                android:centerColor="#40388E3C"
+                android:endColor="#402E7D32" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+
+    <!-- Decorative vines border -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="16dp" />
+            <stroke
+                android:width="3dp"
+                android:color="#8081C784" />
+        </shape>
+    </item>
+</layer-list> 

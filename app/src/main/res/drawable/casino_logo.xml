@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Background Circle -->
+    <path
+        android:fillColor="#336C63FF"
+        android:pathData="M100,100m-90,0a90,90 0,1 1,180 0a90,90 0,1 1,-180 0" />
+
+    <!-- Casino Chip -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M100,100m-70,0a70,70 0,1 1,140 0a70,70 0,1 1,-140 0" />
+
+    <!-- Inner Circle -->
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M100,100m-50,0a50,50 0,1 1,100 0a50,50 0,1 1,-100 0" />
+
+    <!-- Text "CEUBET" -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,90 L80,90 L80,110 L60,110 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M85,90 L105,90 L105,110 L85,110 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M110,90 L130,90 L130,110 L110,110 Z" />
+
+    <!-- Decorative Elements -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M100,40 L105,50 L95,50 Z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M100,160 L105,150 L95,150 Z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M40,100 L50,105 L50,95 Z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M160,100 L150,105 L150,95 Z" />
+
+</vector> 
